@@ -161,21 +161,22 @@ def get_version():
 VERSION = get_version()
 macros.append(('PSUTIL_VERSION', int(VERSION.replace('.', ''))))
 
-# Py_LIMITED_API lets us create a single wheel which works with multiple
-# python versions, including unreleased ones.
-if setuptools and CP36_PLUS and (MACOS or LINUX) and not Py_GIL_DISABLED:
-    py_limited_api = {"py_limited_api": True}
-    options = {"bdist_wheel": {"py_limited_api": "cp36"}}
-    macros.append(('Py_LIMITED_API', '0x03060000'))
-elif setuptools and CP37_PLUS and WINDOWS and not Py_GIL_DISABLED:
-    # PyErr_SetFromWindowsErr / PyErr_SetFromWindowsErrWithFilename are
-    # part of the stable API/ABI starting with CPython 3.7
-    py_limited_api = {"py_limited_api": True}
-    options = {"bdist_wheel": {"py_limited_api": "cp37"}}
-    macros.append(('Py_LIMITED_API', '0x03070000'))
-else:
-    py_limited_api = {}
-    options = {}
+# # Py_LIMITED_API lets us create a single wheel which works with multiple
+# # python versions, including unreleased ones.
+# if setuptools and CP36_PLUS and (MACOS or LINUX) and not Py_GIL_DISABLED:
+#     py_limited_api = {"py_limited_api": True}
+#     options = {"bdist_wheel": {"py_limited_api": "cp36"}}
+#     macros.append(('Py_LIMITED_API', '0x03060000'))
+# elif setuptools and CP37_PLUS and WINDOWS and not Py_GIL_DISABLED:
+#     # PyErr_SetFromWindowsErr / PyErr_SetFromWindowsErrWithFilename are
+#     # part of the stable API/ABI starting with CPython 3.7
+#     py_limited_api = {"py_limited_api": True}
+#     options = {"bdist_wheel": {"py_limited_api": "cp37"}}
+#     macros.append(('Py_LIMITED_API', '0x03070000'))
+# else:
+
+py_limited_api = {}
+options = {}
 
 
 def get_long_description():
